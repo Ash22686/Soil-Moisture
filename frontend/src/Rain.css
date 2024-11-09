@@ -1,0 +1,19 @@
+.rain-button {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%; /* Makes the button circular */
+    font-size: 1.5rem;
+    color: white;
+    border: 5px solid; /* Adds a border to give the circular button a nice outline */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centers the text inside the circle */
+    transition: background-color 0.3s ease; /* Smooth transition for color change */
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual effect */
+  }
+  
+  .rain-button:hover {
+    opacity: 0.9; /* Slight hover effect */
+  }
+  
