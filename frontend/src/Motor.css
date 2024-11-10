@@ -1,0 +1,28 @@
+/* MotorButton.css */
+.motor-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  .motor-button {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .motor-button.on {
+    background-color: green;
+  }
+  
+  .motor-button.off {
+    background-color: red;
+  }
+  

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import './Rain.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Pie } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import "./Rain.css";
+import MotorButton from "./Motor";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -19,18 +20,18 @@ function RainAndMoisture() {
     const interval = setInterval(async () => {
       try {
         const rainResponse = await axios.get(
-          'https://api.thingspeak.com/channels/2704742/feeds.json?api_key=VDA0JYP5HJ6OTE77&results=1'
+          "https://api.thingspeak.com/channels/2704742/feeds.json?api_key=VDA0JYP5HJ6OTE77&results=1"
         );
         const moistureResponse = await axios.get(
-          'https://api.thingspeak.com/channels/2701515/feeds.json?api_key=XO0IPO7N4Q0B8QXM&results=1'
+          "https://api.thingspeak.com/channels/2701515/feeds.json?api_key=XO0IPO7N4Q0B8QXM&results=1"
         );
 
         const rainValue = rainResponse.data.feeds[0].field1;
         const currentMoisture = moistureResponse.data.feeds[0].field1;
-        
+
         setRainValue(rainValue);
         setMoisture(currentMoisture);
-        
+
         if (rainValue > 0 && !isRainStarted) {
           if (startMoisture === null) {
             console.log("Fetched moisture: ", currentMoisture);
@@ -41,9 +42,8 @@ function RainAndMoisture() {
           setStopMoisture(currentMoisture);
           setIsRainStarted(false);
         }
-        
       } catch (error) {
-        console.error('Error fetching data from ThingSpeak', error);
+        console.error("Error fetching data from ThingSpeak", error);
       }
 
       setIsDataLoading(false);
@@ -65,20 +65,20 @@ function RainAndMoisture() {
 
   const sendDeltaToBackend = async (delta) => {
     try {
-      await axios.post('http://localhost:5000/api/irrigation', { delta });
-      console.log('Delta value sent to backend:', delta);
+      await axios.post("http://localhost:5000/api/irrigation", { delta });
+      console.log("Delta value sent to backend:", delta);
     } catch (error) {
-      console.error('Error sending delta to backend:', error);
+      console.error("Error sending delta to backend:", error);
     }
   };
 
   const moistureData = {
-    labels: ['Moisture', 'Dry'],
+    labels: ["Moisture", "Dry"],
     datasets: [
       {
         data: [moisture || 0, 100 - (moisture || 0)],
-        backgroundColor: ['#36A2EB', '#FFCE56'],
-        hoverBackgroundColor: ['#36A2EB', '#FFCE56'],
+        backgroundColor: ["#36A2EB", "#FFCE56"],
+        hoverBackgroundColor: ["#36A2EB", "#FFCE56"],
       },
     ],
   };
@@ -105,7 +105,7 @@ function RainAndMoisture() {
         <h2 className="text-3xl text-black font-semibold pb-6">Rain Status</h2>
         {!isDataLoading ? (
           // biome-ignore lint/a11y/useButtonType: <explanation>
-          <button
+<button
             className="rain-button mt-12"
             style={{
               backgroundColor: rainValue > 0 ? "#28a745" : "#dc3545",
@@ -118,6 +118,9 @@ function RainAndMoisture() {
           <p className="text-black">Loading rain data...</p>
         )}
       </div>
+
+      {/* Pass rainValue as prop to MotorButton */}
+      <MotorButton rainValue={rainValue} />
     </div>
   );
 }

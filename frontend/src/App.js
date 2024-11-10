@@ -7,6 +7,8 @@ import Team from './Team';
 import Result from './Result';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RainAndMoisture from './RainAndMoisture';
+import MotorButton from "./Motor";
+
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
       <Route path = "/team" element = {<Team />}/>
       <Route path = "/rainandmoisture" element = {<RainAndMoisture />}/>
       <Route path = "/result" element = {<Result />}/>
+      <Route path = "/motor" element = {<MotorButton />}/>
+      
 
     </Routes>
     </BrowserRouter>

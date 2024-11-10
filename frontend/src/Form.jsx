@@ -20,7 +20,7 @@ function Form() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/irrigation', formData);
+      const response = await axios.post('http://localhost:5000/api/field', formData);
       console.log('Data sent to MongoDB:', response.data);
       alert('Data submitted successfully!');
     } catch (error) {

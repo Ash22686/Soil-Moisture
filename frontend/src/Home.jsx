@@ -6,6 +6,8 @@ import Footer from './Footer';
 import Team from './Team';
 import Result from './Result';
 import RainAndMoisture from './RainAndMoisture';
+import MotorButton from "./Motor";
+
 function Home() {
   return (
     <div className='overflow-hidden'>
@@ -54,6 +56,7 @@ function Home() {
       </div>
 
       <Result />
+
 
      <Team />
 
